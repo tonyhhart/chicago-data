@@ -20,6 +20,24 @@ Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function (
         return Http::withHeaders([
             'Authorization' => request()->header('Authorization')
         ])
+            ->get("https://data.cityofchicago.org/resource/w22p-bfyb.json?$query")
+            ->json();
+    });
+    
+    Route::get('/v2', function () {
+        [, $query] = explode('?', request()->fullUrl() . '?');
+        return Http::withHeaders([
+            'Authorization' => request()->header('Authorization')
+        ])
+            ->get("https://data.cityofchicago.org/resource/w22p-bfyb.json?$query")
+            ->json();
+    });
+    
+    Route::get('/v1', function () {
+        [, $query] = explode('?', request()->fullUrl() . '?');
+        return Http::withHeaders([
+            'Authorization' => request()->header('Authorization')
+        ])
             ->get("https://data.cityofchicago.org/resource/5hsj-q4xe.json?$query")
             ->json();
     });
